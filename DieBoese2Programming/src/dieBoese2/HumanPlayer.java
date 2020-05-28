@@ -3,7 +3,12 @@ package dieBoese2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+/**
+ * 
+ * @author Floris Wittner
+ * @version 1.0.0
+ *
+ */
 public class HumanPlayer extends Player {
  
 	public HumanPlayer(char figure){
