@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Game {
-//Ich mag Kekse
+
 	public static void main(String[] args) {
 	 Game game = new Game();
 	}

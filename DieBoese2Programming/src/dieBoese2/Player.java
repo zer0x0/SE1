@@ -11,11 +11,18 @@ import java.util.Scanner;
  *   */
 public abstract class Player {
 	char figure;
-
 Player(char figure) {
 	 this.figure = figure;
  }
+/**
+ * Player or AI can block Spaces
+ * @param board
+ */
  protected abstract void blockSpace(Board board);
+ /**
+  * 
+  * @param board
+  */
  protected abstract void makeMove(Board board);
  
 }
