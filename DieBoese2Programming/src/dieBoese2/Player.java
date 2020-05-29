@@ -5,42 +5,24 @@ import java.util.Scanner;
 /**
  * 
  * @author Floris Wittner 1921233
- *  @version 1.0.0
+ *  @version V 0.1.0
+ *  @date 29.05
  *  
  *   */
 public abstract class Player {
 	char figure;
-
 Player(char figure) {
 	 this.figure = figure;
  }
- protected Board blockSpace(Board board) {
-	
-	 
-	System.out.println("Welches Feld wollen Sie blockieren?");
-	 if(board.isValidMove) {
-		board.changeField(getMyMove(),)
-	}else 
-	{
-	System.out.println("Dieses Feld, kann nicht blockiert werden, wählen Sie ein neues Feld aus");
-	
-	}
-	
-	 return board;
-	 
- }
- protected Board makeMove(Board board) {
-	 if(board.isValidMove) {
-			
-		}else 
-		{
-			
-		}
-		 
-		 return board;
-	 
- }
- private void printGiveMeMove() {
-	 
- }
+/**
+ * Player or AI can block Spaces
+ * @param board
+ */
+ protected abstract void blockSpace(Board board);
+ /**
+  * 
+  * @param board
+  */
+ protected abstract void makeMove(Board board);
+ 
 }
