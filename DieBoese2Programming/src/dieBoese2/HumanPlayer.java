@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 /**
  * 
  * @author Floris Wittner
- * @version 0.1.1
+ * @version V 0.2.0
  * @date 29.05
  *
  */

@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 
  * @author Floris Wittner 1921233
- *  @version 0.1.1
+ *  @version V 0.1.0
  *  @date 29.05
  *  
  *   */
