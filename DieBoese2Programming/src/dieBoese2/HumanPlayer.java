@@ -20,9 +20,10 @@ public class HumanPlayer extends Player {
 		System.out.println(p1.readInput());
 	}
 	
-x
+
 	private void setMyMove( String myMove) {
 		this.myMove = myMove;
+		
 	}
 	
 	public String getMyMove(){   
