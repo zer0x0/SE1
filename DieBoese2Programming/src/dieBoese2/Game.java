@@ -5,11 +5,33 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+/**
+ * @author Thanh Tran 1921390
+ * @version 0.1.1
+ */
 public class Game {
 
-    public static void main(String[] args) {
-        Game game = new Game();
+    public Game(){
+        Menu menu = new Menu();
+        //menu settings
+        menu.menuloop;
+
+        /**
+         * generates the Players
+         * (first PvP)
+         */
+        Player p1 = new HumanPlayer('X');
+        Player p2 = new HumanPlayer('O');
+
+
+        /**
+         * creates the Board with desired size
+         */
+        Board board = new Board(menu.getBoardSize);
     }
+
+
     protected static String readInput() {
         String input;
 
@@ -23,21 +45,4 @@ public class Game {
         return input;
 
     }
-    Menu menu = new Menu();
-    //menu settings
-    menu.menuloop();
-
-    /**
-     * generates the Players
-     * (first PvP)
-     */
-
-    Player p1 = new HumanPlayer('X');
-    Player p2 = new HumanPlayer('O');
-
-    /**
-     * creates the Board
-     */
-    Board board = new Board(menu.getBoardSize);
-
 }
