@@ -15,39 +15,28 @@ public class HumanPlayer extends Player {
 	public HumanPlayer(char figure){
 		super(figure);
  }
-	String readInput() {
-		String coordinate;
-		var in = new BufferedReader(new InputStreamReader(System.in));
-		try {
-			coordinate = in.readLine();
-		// ACHTUNG könnte Endlosschleife werden
-		} catch (IOException e) {
-			return readInput();  
-
-		}
-			setMyMove(coordinate);
-			return coordinate;
-		
+	public static void main(String[] args) {
+		HumanPlayer p1 = new HumanPlayer('X');
+		System.out.println(p1.readInput());
 	}
+	
+x
 	private void setMyMove( String myMove) {
 		this.myMove = myMove;
 	}
 	
-	public String getMyMove()
-	{   
+	public String getMyMove(){   
 		return myMove;
-		
 		}
-	private void printGiveMeMove() {}
+
 
 	@Override
 	protected void blockSpace(Board board) {
 		System.out.println("Welches Feld wollen Sie blockieren?");
-		readInput();
+		setMyMove(Game.readInput());
 		 if(board.isValidMove(getMyMove())) {
 			 board.placeFigure(getMyMove(), 'B');
 		 } else {
-			 
 			System.out.println("Dieses Feld kann nicht blockiert werden.");
 			blockSpace(board);
 		 }
@@ -57,7 +46,7 @@ public class HumanPlayer extends Player {
 	@Override
 	protected void makeMove(Board board) {
 		System.out.println("Auf welches Feld wollen Sie einen Stein legen?");
-		readInput();
+		setMyMove(Game.readInput());
 		 if(board.isValidMove(getMyMove())) {
 			 board.placeFigure(getMyMove(), figure);
 		 } else {
