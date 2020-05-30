@@ -12,23 +12,26 @@ import java.io.InputStreamReader;
  */
 public class Game {
 
+    Player p1, p2;
+    Board board;
+
     public Game(){
         Menu menu = new Menu();
         //menu settings
-        menu.menuloop;
+        menu.menuloop();
 
         /**
          * generates the Players
          * (first PvP)
          */
-        Player p1 = new HumanPlayer('X');
-        Player p2 = new HumanPlayer('O');
+        p1 = new HumanPlayer('X');
+        p2 = new HumanPlayer('O');
 
 
         /**
          * creates the Board with desired size
          */
-        Board board = new Board(menu.getBoardSize);
+        board = new Board(menu.getBoardSize);
     }
 
 
