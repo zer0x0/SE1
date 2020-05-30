@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.1
+ * @version 0.1.2
  */
 public class Game {
 
