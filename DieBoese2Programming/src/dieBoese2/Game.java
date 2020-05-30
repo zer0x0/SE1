@@ -46,6 +46,5 @@ public class Game {
             return readInput();
         }
         return input;
-
     }
 }
