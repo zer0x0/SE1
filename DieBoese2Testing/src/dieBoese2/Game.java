@@ -3,20 +3,21 @@ package dieBoese2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.2
+ * @version 0.1.3
  */
 public class Game {
 
-	Player p1, p2;
-	Board board;
+	public Player p1, p2;
+	public Board board;
 
 	public Game() {
 		Menu menu = new Menu();
 		// menu settings
-		menu.menuloop();
+		menu.menuLoop();
 
 		/**
 		 * generates the Players (first PvP)
@@ -27,19 +28,15 @@ public class Game {
 		/**
 		 * creates the Board with desired size
 		 */
-		board = new Board(menu.getBoardSize);
+		board = new Board(menu.getBoardSize());
 	}
 
 	protected static String readInput() {
+		Scanner sc = new Scanner(System.in);
 		String input;
 
-		try (var in = new BufferedReader(new InputStreamReader(System.in))) {
-			input = in.readLine();
-			// ACHTUNG könnte Endlosschleife werden
-		} catch (IOException e) {
-			System.out.println("Eingabe ist falsch!");
-			return readInput();
-		}
+		input = sc.next();
+
 		return input;
 	}
 }
