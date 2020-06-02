@@ -1,5 +1,13 @@
 package dieBoese2;
 
+import java.awt.Point;
+/**
+ * 
+ * @author Floris Wittner
+ * @version 0.1.1.
+ * @date 02.06.2019
+ *
+ */
 public class Board {
 	char boardstate[][];
 
@@ -19,7 +27,7 @@ public class Board {
 		   System.out.println(board.convertCoordinate("1a"));
 		   System.out.println(board.convertCoordinate("a1"));
 		   System.out.println(board.convertCoordinate("a13"));
-		   System.out.println(board.convertCoordinate("13b"));
+	   System.out.println(board.convertCoordinate("13b"));
 		  
 		}
 
@@ -32,44 +40,47 @@ public class Board {
 	   
    }
 
-	protected int[] convertCoordinate(String coordinate) {
+	protected Point convertCoordinate(String coordinate) {
 
 		int x = 0, y = 0;
-		
-		int coordinateInt[] = new int[2];
+		int firstChar, secondChar, thirdChar;
+		Point xy = new Point();
+	
 		coordinate = coordinate.toLowerCase();
 		
 
 		if (coordinate.length() == 3) {
-			if ((int) coordinate.charAt(1) <= this.boardstate.length && ((int) coordinate.charAt(2) - 48) <= this.boardstate.length) {
+		firstChar = (int) coordinate.charAt(0) - 48;
+		secondChar = (int) coordinate.charAt(1) - 48;
+		thirdChar = (int) coordinate.charAt(2) - 48;
+			if (firstChar <= this.boardstate.length && firstChar >= 0) {
 
-				y = (int) coordinate.charAt(1) * 10 + coordinate.charAt(2);
-				x = (int) coordinate.charAt(3) - 48;
+				y = firstChar * 10 + secondChar;
+				x = thirdChar;
 
-			} else if ((int) coordinate.charAt(2) <= this.boardstate.length && ((int) coordinate.charAt(1) - 48) <= this.boardstate.length) {
-				y = (int) coordinate.charAt(2) * 10 + coordinate.charAt(3);
-				x = (int) coordinate.charAt(1) - 48;
+			} else if (firstChar > 48 && firstChar <= this.boardstate.length + 48) {
+				y =  secondChar * 10 + thirdChar;
+				x = firstChar;
 
 			}
 		} else if (coordinate.length() == 2) {
-//			System.out.println(this.boardstate.length);
-//			System.out.println(coordinate.charAt(1));
-			if ((int) coordinate.charAt(1) <= this.boardstate.length &&
-					((int) coordinate.charAt(2) - 48) <= this.boardstate.length) {
-
-			y = (int) coordinate.charAt(1);
-			x = (int) coordinate.charAt(2) - 48;
-
-		} else if ((int) coordinate.charAt(2) <= this.boardstate.length && ((int) coordinate.charAt(1) - 48) <= this.boardstate.length) {
-			y = (int) coordinate.charAt(2);
-			x = (int) coordinate.charAt(1) - 48;
-
+			firstChar = (int) coordinate.charAt(0) - 48;
+			secondChar = (int) coordinate.charAt(1) - 48;
+			if (firstChar <= this.boardstate.length && firstChar >= 0) {
+				System.out.println("test1");
+			y = firstChar;
+			x = secondChar;
+			}
+		 else if (firstChar > 48 && firstChar <= this.boardstate.length + 48) {
+			System.out.println("test2");
+			y = secondChar;
+			x = firstChar;
+			}
+		
 		}
-		}
-		coordinateInt[1] = x;
-		coordinateInt[2] = y;
-		return coordinateInt;
-
+		System.out.println(x + "  " + y);
+		xy.setLocation(x -48, y);
+		return xy;
 	
 }
 	}
