@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.3
+ * @version 0.1.4
  */
 public class Game {
 
