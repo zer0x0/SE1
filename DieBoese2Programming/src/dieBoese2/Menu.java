@@ -72,6 +72,7 @@ public class Menu {
 // Exit Game
 			if (choice == 6) {
 				keyboard.close();
+				this.exit();
 				weChillInMenu = false;
 			}
 		} while (weChillInMenu);
@@ -260,7 +261,7 @@ public class Menu {
 	}
 
 	// to clear the console
-	public void cls() {
+	private void cls() {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 		} catch (Exception e) {
@@ -268,6 +269,18 @@ public class Menu {
 		}
 
 	}
+	
+	//just to make safe, that the console closes on every PC
+	private void exit() {
+		try {
+			new ProcessBuilder("cmd", "/c", "exit").inheritIO().start().waitFor();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+	
+	
 
 	// for testing
 	public static void main(String[] Args) {
