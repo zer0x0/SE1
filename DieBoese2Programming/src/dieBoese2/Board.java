@@ -5,7 +5,7 @@ import java.awt.Point;
 /**
  * 
  * @author Floris Wittner
- * @version 0.1.3.
+ * @version 0.1.2.
  * @date 02.06.2019
  *
  */
