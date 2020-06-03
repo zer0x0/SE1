@@ -11,11 +11,12 @@ import java.util.Scanner;
  */
 public class Game {
 
-	public Player p1, p2;
-	public Board board;
+	protected Player p1, p2;
+	protected Board board;
+	protected Menu menu;
 
 	public Game() {
-		Menu menu = new Menu();
+		menu = new Menu();
 		// menu settings
 		menu.menuLoop();
 
