@@ -5,7 +5,7 @@ import java.awt.Point;
 /**
  * 
  * @author Floris Wittner
- * @version 0.1.2.
+ * @version 0.1.3.
  * @date 02.06.2019
  *
  */
@@ -18,11 +18,16 @@ public class Board {
 
 	Board(int size) {
 		boardstate = new char[size][size];
+		for(int i = 0; i < boardstate.length; i++) {
+			for(int j = 0; j < boardstate[0].length; j++) {
+				boardstate[i][j] = ' ';
+			}
+		}
 
 	}
 
 	public static void main(String[] args) {
-		Board board = new Board();
+		Board board = new Board(15);
 
 		String test = "a12";
 //			System.out.println((int) test.charAt(1));
@@ -77,7 +82,7 @@ public class Board {
 
 		int x = 0, y = 0;
 		int firstChar, secondChar, thirdChar;
-		Point xy = new Point();
+		
 
 		coordinate = coordinate.toLowerCase();
 		// wenn coordinate aus 2 Ziffer und 1 Buchstabe besteht
@@ -100,11 +105,11 @@ public class Board {
 			firstChar = (int) coordinate.charAt(0) - 48;
 			secondChar = (int) coordinate.charAt(1) - 48;
 			if (firstChar <= this.boardstate.length) {
-				System.out.println("test1");
+				
 				y = firstChar;
 				x = secondChar;
 			} else if (firstChar > 48) {
-				System.out.println("test2");
+				
 				y = secondChar;
 				x = firstChar;
 			}
@@ -113,9 +118,9 @@ public class Board {
 			return null;
 		}
 
-		System.out.println(x + "  " + y);
-		xy.setLocation(x - 48, y);
-		return xy;
+		Point point = new Point(x - 48, y);
+		
+		return point;
 
 	}
 }
