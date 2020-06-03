@@ -21,19 +21,26 @@ public class Board {
 
 	}
 
-	public static void main(String[] args) throws WrongInputException {
+	public static void main(String[] args) {
 		Board board = new Board();
 
 		String test = "a12";
 //			System.out.println((int) test.charAt(1));
 //			System.out.println(board.boardstate.length);
-		System.out.println(board.convertCoordinate("1a"));
-		System.out.println(board.convertCoordinate("a1"));
-		System.out.println(board.convertCoordinate("a13"));
-		System.out.println(board.convertCoordinate("13b"));
+		System.out.println(board.isValidMove("1a"));
+		System.out.println(board.isValidMove("a13"));
+		System.out.println(board.isValidMove("17bd"));
+		System.out.println(board.isValidMove("z7"));
+		System.out.println(board.isValidMove("t"));
 
 	}
 
+	/**
+	 * 
+	 * @param coordinate
+	 * @return true if a figure could be set at coordinate; false if not
+	 * 
+	 */
 	protected boolean isValidMove(String coordinate) {
 
 		// keine richtige koordinate &&
@@ -42,15 +49,19 @@ public class Board {
 
 		// besetzt
 
-		try {
-			if (this.boardstate[this.convertCoordinate(coordinate).x][this.convertCoordinate(coordinate).y] == ' ')
-				return true;
-			else {
-				System.out.println("Dieses Feld ist schon belegt. Geben sie ein neues Feld ein.");
-				return false;
-			}
-		} catch (WrongInputException e) {
+		Point point = this.convertCoordinate(coordinate);
+		if (point == null) {
 			System.out.println("Falsche Eingabe bitte geben sie eine gültige Koordinate ein.");
+			return false;
+		}
+		if (point.x > this.boardstate.length || point.x < 0 || point.y > this.boardstate[0].length || point.y < 0) {
+			System.out.println("Diese Koordinate liegt nicht auf dem Spielbrett");
+			return false;
+		}
+		if (this.boardstate[point.x][point.y] == ' ')
+			return true;
+		else {
+			System.out.println("Dieses Feld ist schon belegt. Geben sie ein neues Feld ein.");
 			return false;
 		}
 	}
@@ -60,44 +71,46 @@ public class Board {
 	 * 
 	 * @param coordinate
 	 * @return Point
-	 * @throws WrongInputException
+	 * 
 	 */
-	protected Point convertCoordinate(String coordinate) throws WrongInputException {
+	protected Point convertCoordinate(String coordinate) {
 
 		int x = 0, y = 0;
 		int firstChar, secondChar, thirdChar;
 		Point xy = new Point();
 
 		coordinate = coordinate.toLowerCase();
-
+		// wenn coordinate aus 2 Ziffer und 1 Buchstabe besteht
 		if (coordinate.length() == 3) {
 			firstChar = (int) coordinate.charAt(0) - 48;
 			secondChar = (int) coordinate.charAt(1) - 48;
 			thirdChar = (int) coordinate.charAt(2) - 48;
-			if (firstChar <= this.boardstate.length && firstChar >= 0) {
+			if (firstChar <= this.boardstate.length) {
 
 				y = firstChar * 10 + secondChar;
 				x = thirdChar;
 
-			} else if (firstChar > 48 && firstChar <= this.boardstate.length + 48) {
+			} else if (firstChar > 48) {
 				y = secondChar * 10 + thirdChar;
 				x = firstChar;
 
 			}
+			// wenn coordinate aus 1 Ziffer und 1 Buchstabe besteht
 		} else if (coordinate.length() == 2) {
 			firstChar = (int) coordinate.charAt(0) - 48;
 			secondChar = (int) coordinate.charAt(1) - 48;
-			if (firstChar <= this.boardstate.length && firstChar >= 0) {
+			if (firstChar <= this.boardstate.length) {
 				System.out.println("test1");
 				y = firstChar;
 				x = secondChar;
-			} else if (firstChar > 48 && firstChar <= this.boardstate.length + 48) {
+			} else if (firstChar > 48) {
 				System.out.println("test2");
 				y = secondChar;
 				x = firstChar;
 			}
+			// falls String keine vernünftige Koordinate ist //ist das ein unschöne Lösung?
 		} else {
-			throw new WrongInputException();
+			return null;
 		}
 
 		System.out.println(x + "  " + y);
@@ -105,12 +118,4 @@ public class Board {
 		return xy;
 
 	}
-}
-
-class WrongInputException extends Exception {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 }
