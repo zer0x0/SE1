@@ -7,15 +7,16 @@ import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.3
+ * @version 0.1.5
  */
 public class Game {
 
-	public Player p1, p2;
-	public Board board;
+	protected Player p1, p2;
+	protected Board board;
+	protected Menu menu;
 
 	public Game() {
-		Menu menu = new Menu();
+		menu = new Menu();
 		// menu settings
 		menu.menuLoop();
 
@@ -36,6 +37,7 @@ public class Game {
 		String input;
 
 		input = sc.next();
+		sc.close();
 
 		return input;
 	}
