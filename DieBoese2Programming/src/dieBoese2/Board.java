@@ -12,9 +12,7 @@ import java.awt.Point;
 public class Board {
 	char boardstate[][];
 
-	Board() {
-		boardstate = new char[15][15];
-	}
+
 
 	Board(int size) {
 		boardstate = new char[size][size];
