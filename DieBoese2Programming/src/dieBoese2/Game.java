@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.4
+ * @version 0.1.5
  */
 public class Game {
 
@@ -37,6 +37,7 @@ public class Game {
 		String input;
 
 		input = sc.next();
+		sc.close();
 
 		return input;
 	}
