@@ -1,6 +1,7 @@
 package dieBoese2;
 
 import java.awt.Point;
+import java.util.Scanner;
 
 /**
  * 
@@ -30,15 +31,14 @@ public class Board {
     protected void printBoard() {
         int counter = boardstate.length - 1;
         System.out.print("    ");
-        for (int i = 97; i < 97 + boardstate.length; i++) {
+        for (int i = 65; i < 65 + boardstate.length; i++) {
             System.out.print((char) i + "  ");
         }
         System.out.println();
         while (counter >= 0) {
-            if(counter < 9) {           
-            System.out.print(counter + 1 + "  ");
-            }
-            else {
+            if (counter < 9) {
+                System.out.print(counter + 1 + "  ");
+            } else {
                 System.out.print(counter + 1 + " ");
             }
             for (int i = 0; i < boardstate.length; i++) {
@@ -50,36 +50,16 @@ public class Board {
     }
 
     public static void main(String[] args) {
-        Board board = new Board(16, true);
+        Board board = new Board(15, true);
         board.printBoard();
-//      Menu menu1 = new Menu();
-//      Scanner sc = new Scanner(System.in);
-//      board.printBoard();
-//      do {
-//          board.placeFigure(sc.nextLine(), board.getSymbol());
-//          menu1.cls();
-//      } while (board.isRunning());
-//      sc.close();
-
-//      String test = "a12";
-//      // System.out.println((int) test.charAt(1));
-//      // System.out.println(board.boardstate.length);
-//      // System.out.println(board.isValidMove("1a"));
-//      // System.out.println(board.isValidMove("a13"));
-//      // System.out.println(board.isValidMove("17bd"));
-//      // System.out.println(board.isValidMove("z7"));
-//      // System.out.println(board.isValidMove("t"));
-//      board.placeFigure("a1", board.getSymbol());
-//      board.placeFigure("a2", board.getSymbol());
-//      board.placeFigure("b1", board.getSymbol());
-//      board.placeFigure("b2", board.getSymbol());
-//      board.placeFigure("c1", board.getSymbol());
-//      board.placeFigure("c2", board.getSymbol());
-//      board.placeFigure("d1", board.getSymbol());
-//      board.placeFigure("d2", board.getSymbol());
-//      board.placeFigure("e1", board.getSymbol());
-//      board.placeFigure("e2", board.getSymbol());
-//      board.printBoard();
+        // Menu menu1 = new Menu();
+        Scanner sc = new Scanner(System.in);
+        // board.printBoard();
+        do {
+            board.placeFigure(sc.nextLine(), board.getSymbol());
+            // menu1.cls();
+        } while (board.isRunning());
+        sc.close();
 
     }
 
@@ -172,15 +152,9 @@ public class Board {
 
     boolean whoWon() {
 
-        isRunning = false;
-        if (player1) {
-            System.out.println("Spieler 1 hat gewonnen!");
-        } else {
-            System.out.println("Spieler 2 hat gewonnen!");
-        }
+        whoWon = player1;
 
-        return player1;
-
+        return whoWon;
     }
 
     protected void checkWin(String coordinate, char symbol) {
@@ -188,64 +162,77 @@ public class Board {
         int x = (int) convertCoordinate(coordinate).getY() - 1;
         int y = (int) convertCoordinate(coordinate).getX() - 1;
 
-// check vertical   
+        // check vertical
         for (int i = 0; i < 5; i++) {
 
             int matches = 0;
-//      therefore we check 4 times starting at x-4 if there are 4 matches in a row
+            // therefore we check 4 times starting at x-4 if there are 4 matches in a row
             for (int j = 4; j >= 0; j--) {
                 int offset = i - j;
-//              System.out.println(matches + "+" + j + "+" + symbol + "+" + i);
-//          dont forget to stay inside the bounds of the board
+                // System.out.println(matches + "+" + j + "+" + symbol + "+" + i);
+                // dont forget to stay inside the bounds of the board
                 if (y + offset >= 0 && y + offset < boardstate.length) {
                     if (boardstate[y + offset][x] == symbol) {
                         matches++;
                     }
                 }
                 if (matches == 5) {
-                    whoWon();
+                    isRunning = false;
+                    if (this.whoWon()) {
+                        System.out.println("Spieler 1 hat gewonnen!");
+                    } else {
+                        System.out.println("Spieler 2 hat gewonnen!");
+                    }
                 }
             }
         }
 
-//    check horizontal
-//  we have to check everything from -5 to the left, until +5 to the right
+        // check horizontal
+        // we have to check everything from -5 to the left, until +5 to the right
         for (int i = 0; i < 5; i++) {
 
             int matches = 0;
-//      therefore we check 4 times starting at x-4 if there are 4 matches in a row
+            // therefore we check 4 times starting at x-4 if there are 4 matches in a row
             for (int j = 4; j >= 0; j--) {
                 int offset = i - j;
-//          dont forget to stay inside the bounds of the board
+                // dont forget to stay inside the bounds of the board
                 if (x + offset >= 0 && x + offset < boardstate.length) {
                     if (boardstate[y][x + offset] == symbol) {
                         matches++;
                     }
                 }
             }
-//      if we find 5 machtes, we return true. otherwise we start looking for 4 matches on the next position
+            // if we find 5 machtes, we return true. otherwise we start looking for 4
+            // matches on the next position
             if (matches == 5) {
-                whoWon();
+                isRunning = false;
+                if (this.whoWon()) {
+                    System.out.println("Spieler 1 hat gewonnen!");
+                } else {
+                    System.out.println("Spieler 2 hat gewonnen!");
+                }
             }
 
         }
-//    check diagonal
-//  simular to the horizontal check, you have to check everything around the last coin diagonally from -5 to +5
+        // check diagonal
+        // simular to the horizontal check, you have to check everything around the last
+        // coin diagonally from -5 to +5
         for (int i = 0; i < 5; i++) {
             int matches2 = 0;
             int matches = 0;
             for (int j = 4; j >= 0; j--) {
                 int offset = i - j;
-//          now not only 1 variable changes but both, since we move diagonally (this one is the slash check /)
-//          don't forget to stay in bounds
+                // now not only 1 variable changes but both, since we move diagonally (this one
+                // is the slash check /)
+                // don't forget to stay in bounds
                 if (x + offset >= 0 && x + offset < boardstate.length && y + offset < boardstate.length
                         && y + offset >= 0) {
                     if (boardstate[y + offset][x + offset] == symbol) {
                         matches++;
                     }
                 }
-//          this one is the backslash check \
-//          don't forget to stay in bounds
+                // this one is the backslash check \
+                // don't forget to stay in bounds
                 if (x + offset >= 0 && x + offset < boardstate.length && y - offset < boardstate.length
                         && y - offset >= 0) {
                     if (boardstate[y - offset][x + offset] == symbol) {
@@ -255,216 +242,197 @@ public class Board {
                 }
             }
 
-//      if there is a diagonal / or \ match, we return true
+            // if there is a diagonal / or \ match, we return true
             if (matches == 5 || matches2 == 5) {
-                whoWon();
+                isRunning = false;
+                if (this.whoWon()) {
+                    System.out.println("Spieler 1 hat gewonnen!");
+                } else {
+                    System.out.println("Spieler 2 hat gewonnen!");
+                }
             }
         }
-//      if none of the winning conditions are met, we return false
+        // if none of the winning conditions are met, we return false
     }
 
     protected void checkDeleted(String coordinate, char symbol) {
 
         int y = (int) convertCoordinate(coordinate).getY() - 1;
         int x = (int) convertCoordinate(coordinate).getX() - 1;
+
         char enemysymbol = ' ';
         if (symbol == 'X') {
             enemysymbol = 'O';
         } else {
             enemysymbol = 'X';
         }
+
         // horizontal links
-        if (x - 3 >= 0) {
-            System.out.println("1");
-            if (boardstate[x - 3][y] == symbol) {
-                System.out.println("2");
-                if (boardstate[x - 2][y] == enemysymbol && boardstate[x - 1][y] == enemysymbol) {
-                    System.out.println("3");
-                    boardstate[x - 1][y] = ' ';
-                    boardstate[x - 2][y] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x - 3 >= 0 && boardstate[x - 3][y] == symbol && boardstate[x - 2][y] == enemysymbol
+                && boardstate[x - 1][y] == enemysymbol) {
+
+            boardstate[x - 1][y] = ' ';
+            boardstate[x - 2][y] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
         // horizontal rechts
-        if (x + 3 < boardstate.length) {
-            System.out.println("1");
-            if (boardstate[x + 3][y] == symbol) {
-                System.out.println("2");
-                if (boardstate[x + 1][y] == enemysymbol && boardstate[x + 2][y] == enemysymbol) {
-                    System.out.println("3");
-                    boardstate[x + 1][y] = ' ';
-                    boardstate[x + 2][y] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x + 3 < boardstate.length && boardstate[x + 3][y] == symbol && boardstate[x + 1][y] == enemysymbol
+                && boardstate[x + 2][y] == enemysymbol) {
+            boardstate[x + 1][y] = ' ';
+            boardstate[x + 2][y] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
         // vertikal unten
-        if (y - 3 >= 0) {
-            System.out.println("1");
-            if (boardstate[x][y - 3] == symbol) {
-                System.out.println("2");
-                if (boardstate[x][y - 1] == enemysymbol && boardstate[x][y - 2] == enemysymbol) {
-                    System.out.println("3");
-                    boardstate[x][y - 1] = ' ';
-                    boardstate[x][y - 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (y - 3 >= 0 && boardstate[x][y - 3] == symbol && boardstate[x][y - 1] == enemysymbol
+                && boardstate[x][y - 2] == enemysymbol) {
+            boardstate[x][y - 1] = ' ';
+            boardstate[x][y - 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
         // vertikal oben
-        if (y + 3 < boardstate.length) {
-            System.out.println("1");
-            if (boardstate[x][y + 3] == symbol) {
-                System.out.println("2");
-                if (boardstate[x][y + 1] == enemysymbol && boardstate[x][y + 2] == enemysymbol) {
-                    System.out.println("3");
-                    boardstate[x][y + 1] = ' ';
-                    boardstate[x][y + 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (y + 3 < boardstate.length && boardstate[x][y + 3] == symbol && boardstate[x][y + 1] == enemysymbol
+                && boardstate[x][y + 2] == enemysymbol) {
+            boardstate[x][y + 1] = ' ';
+            boardstate[x][y + 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
 
         // diagonal unten links --> oben rechts
-        if (x + 3 < boardstate.length && y + 3 < boardstate.length) {
-            if (boardstate[x + 3][y + 3] == symbol) {
-                if (boardstate[x + 1][y + 1] == enemysymbol && boardstate[x + 2][y + 2] == enemysymbol) {
-                    boardstate[x + 1][y + 1] = ' ';
-                    boardstate[x + 2][y + 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x + 3 < boardstate.length && y + 3 < boardstate.length && boardstate[x + 3][y + 3] == symbol
+                && boardstate[x + 1][y + 1] == enemysymbol && boardstate[x + 2][y + 2] == enemysymbol) {
+            boardstate[x + 1][y + 1] = ' ';
+            boardstate[x + 2][y + 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
 
         // diagonal oben rechts --> unten links
-        if (x - 3 >= 0 && y - 3 >= 0) {
-            if (boardstate[x - 3][y - 3] == symbol) {
-                if (boardstate[x - 1][y - 1] == enemysymbol && boardstate[x - 2][y - 2] == enemysymbol) {
-                    boardstate[x - 1][y - 1] = ' ';
-                    boardstate[x - 2][y - 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x - 3 >= 0 && y - 3 >= 0 && boardstate[x - 3][y - 3] == symbol && boardstate[x - 1][y - 1] == enemysymbol
+                && boardstate[x - 2][y - 2] == enemysymbol) {
+            boardstate[x - 1][y - 1] = ' ';
+            boardstate[x - 2][y - 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
 
         // diagonal unten rechts --> oben links
-        if (x - 3 >= 0 && y + 3 < boardstate.length) {
-            if (boardstate[x - 3][y + 3] == symbol) {
-                if (boardstate[x - 1][y + 1] == enemysymbol && boardstate[x - 2][y + 2] == enemysymbol) {
-                    boardstate[x - 1][y + 1] = ' ';
-                    boardstate[x - 2][y + 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x - 3 >= 0 && y + 3 < boardstate.length && boardstate[x - 3][y + 3] == symbol
+                && boardstate[x - 1][y + 1] == enemysymbol && boardstate[x - 2][y + 2] == enemysymbol) {
+            boardstate[x - 1][y + 1] = ' ';
+            boardstate[x - 2][y + 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
 
         // diagonal oben links --> unten rechts
-        if (x + 3 < boardstate.length & y - 3 >= 0) {
-            if (boardstate[x + 3][y - 3] == symbol) {
-                if (boardstate[x + 1][y - 1] == enemysymbol && boardstate[x + 2][y - 2] == enemysymbol) {
-                    boardstate[x + 1][y - 1] = ' ';
-                    boardstate[x + 2][y - 2] = ' ';
-                    System.out.println("Es wurden Figuren geschlagen!");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    System.out.println("|||||||||||||||||||||||||||||||||||||||||||||");
-                    this.printBoard();
-                }
-            }
+        if (x + 3 < boardstate.length & y - 3 >= 0 && boardstate[x + 3][y - 3] == symbol
+                && boardstate[x + 1][y - 1] == enemysymbol && boardstate[x + 2][y - 2] == enemysymbol) {
+            boardstate[x + 1][y - 1] = ' ';
+            boardstate[x + 2][y - 2] = ' ';
+            System.out.println();
+            System.out.println("Es wurden Figuren geschlagen!");
+            System.out.println();
+            System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println();
+            this.printBoard();
         }
 
     }
 
     void placeFigure(String coordinate, char symbol) {
+
+        if (isValidMove(coordinate)) {
+            boardstate[(int) convertCoordinate(coordinate).getX() - 1][(int) convertCoordinate(coordinate).getY()
+                    - 1] = symbol;
+
+            this.printBoard();
+            this.checkDeleted(coordinate, symbol);
+            checkWin(coordinate, symbol);
+
+            player1 = !player1;
+            zugcounter++;
+        }
         if (zugcounter == 3) {
-            if (blockBoard(coordinate)) {
-
-                if (isValidMove(coordinate)) {
-                    boardstate[(int) convertCoordinate(coordinate).getX()
-                            - 1][(int) convertCoordinate(coordinate).getY() - 1] = symbol;
-
-//          System.out.println(
-//                  boardstate[(int) convertCoordinate(coordinate).getX()-1][(int) convertCoordinate(coordinate).getY()-1]);
-                    this.printBoard();
-                    this.checkDeleted(coordinate, symbol);
-                    checkWin(coordinate, symbol);
-
-                    player1 = !player1;
-                    zugcounter++;
-                }
-            }
-        } else {
-            if (isValidMove(coordinate)) {
-                boardstate[(int) convertCoordinate(coordinate).getX() - 1][(int) convertCoordinate(coordinate).getY()
-                        - 1] = symbol;
-
-//      System.out.println(
-//              boardstate[(int) convertCoordinate(coordinate).getX()-1][(int) convertCoordinate(coordinate).getY()-1]);
-                this.printBoard();
-                this.checkDeleted(coordinate, symbol);
-                checkWin(coordinate, symbol);
-
-                player1 = !player1;
-                zugcounter++;
-            }
+            blockBoard();
+        } else if (zugcounter == 4) {
+            unblockBoard();
         }
     }
 
-    // Frage: bei geradem Spielfeld (16x16) werden 2 Felder blockiert (jeweils die
-    // mittigen) oder welcher?
+    void blockBoard() {
 
-    protected boolean blockBoard(String coordinate) {
-
-        int y = (int) convertCoordinate(coordinate).getY() - 1;
-        int x = (int) convertCoordinate(coordinate).getX() - 1;
-
-        // Viereck in der Mitte wird geblockt
-        if (x > 0 && boardstate.length - 1 > x || y > 0 && boardstate.length - 1 > y) {
-            System.out.println("Diese Feld ist in diesem Zug blockiert, wähle erneut!");
-            return false;
+        for (int i = 1; i < boardstate.length - 1; i++) {
+            for (int j = 1; j < boardstate.length - 1; j++) {
+                if (boardstate[i][j] == ' ') {
+                    boardstate[i][j] = 'B';
+                }
+            }
         }
         // gerades Spielfeld
         if (boardstate.length % 2 == 0) {
-            if (x == 0 && y == boardstate.length / 2 || x == 0 && y == boardstate.length / 2 - 1
-                    || x == boardstate.length - 1 && y == boardstate.length / 2
-                    || x == boardstate.length - 1 && y == boardstate.length / 2 - 1
-                    || y == 0 && x == boardstate.length / 2 || y == 0 && x == boardstate.length / 2 - 1
-                    || y == boardstate.length - 1 && x == boardstate.length / 2
-                    || y == boardstate.length - 1 && x == boardstate.length / 2 - 1) {
-                System.out.println("Diese Feld ist in diesem Zug blockiert, wähle erneut!");
-                return false;
-            }
+
+            boardstate[0][boardstate.length / 2] = 'B';
+            boardstate[0][boardstate.length / 2 - 1] = 'B';
+            boardstate[boardstate.length - 1][boardstate.length / 2] = 'B';
+            boardstate[boardstate.length - 1][boardstate.length / 2 - 1] = 'B';
+            boardstate[boardstate.length / 2][0] = 'B';
+            boardstate[boardstate.length / 2 - 1][0] = 'B';
+            boardstate[boardstate.length / 2][boardstate.length - 1] = 'B';
+            boardstate[boardstate.length / 2 - 1][boardstate.length - 1] = 'B';
             // ungerades Spielfeld
         } else {
-            if (x == (boardstate.length - 1) / 2 && y == 0
-                    || x == (boardstate.length - 1) / 2 && y == boardstate.length - 1
-                    || y == (boardstate.length - 1) / 2 && x == 0
-                    || y == (boardstate.length - 1) / 2 && x == boardstate.length - 1) {
-                System.out.println("Diese Feld ist in diesem Zug blockiert, wähle erneut!");
-                return false;
+            boardstate[0][(boardstate.length - 1) / 2] = 'B';
+            boardstate[(boardstate.length - 1) / 2][boardstate.length - 1] = 'B';
+            boardstate[boardstate.length - 1][(boardstate.length - 1) / 2] = 'B';
+            boardstate[(boardstate.length - 1) / 2][0] = 'B';
+
+        }
+        this.printBoard();
+    }
+
+    void unblockBoard() {
+
+        for (int i = 0; i < boardstate.length; i++) {
+            for (int j = 0; j < boardstate.length; j++) {
+                if (boardstate[i][j] == 'B') {
+                    boardstate[i][j] = ' ';
+                }
             }
         }
 
-        return true;
+        this.printBoard();
     }
 
     char getSymbol() {
