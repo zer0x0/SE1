@@ -2,6 +2,8 @@ package dieBoese2;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 /**
@@ -136,4 +138,93 @@ public class BoardTest {
 		assertFalse(board.whoWon());
 	}
 
+	/**
+	 * Test-ID Board33
+	 */
+	@Test
+	public void convertCoordinatesTest1() {
+		Board board = new Board(boardWidth, true);
+		int[] expected = { 0, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("a1"), expected));
+		int[] expected = { 0, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("a15"), expected));
+		int[] expected = { 14, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("o1"), expected));
+		int[] expected = { 14, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("o15"), expected));
+		int[] expected = { 0, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("A1"), expected));
+		int[] expected = { 0, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("A15"), expected));
+		int[] expected = { 14, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("O1"), expected));
+		int[] expected = { 14, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("O15"), expected));
+	}
+
+	/**
+	 * Test-ID Board34
+	 */
+	@Test
+	public void convertCoordinatesTest2() {
+		Board board = new Board(boardWidth, true);
+		int[] expected = { 15, 33 };
+		assertTrue(Arrays.equals(board.convertCoordinate("p34"), expected));
+		int[] expected = { 0, 21 };
+		assertTrue(Arrays.equals(board.convertCoordinate("a22"), expected));
+		int[] expected = { 18, 1 };
+		assertTrue(Arrays.equals(board.convertCoordinate("s2"), expected));
+	}
+
+	/**
+	 * Test-ID Board35
+	 */
+	@Test
+	public void convertCoordinatesTest3() {
+		Board board = new Board(boardWidth, true);
+		int[] expected = { 0, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("1a"), expected));
+		int[] expected = { 0, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("15a"), expected));
+		int[] expected = { 14, 0 };
+		assertTrue(Arrays.equals(board.convertCoordinate("1o"), expected));
+		int[] expected = { 14, 14 };
+		assertTrue(Arrays.equals(board.convertCoordinate("15o"), expected));
+	}
+
+	/**
+	 * Test-ID Board36-1
+	 */
+	@Test(expected = Exception.class)
+	public void convertCoordinatesTest4() {
+		Board board = new Board(boardWidth, true);
+		board.convertCoordinate("1234");
+	}
+	
+	/**
+	 * Test-ID Board36-2
+	 */
+	@Test(expected = Exception.class)
+	public void convertCoordinatesTest5() {
+		Board board = new Board(boardWidth, true);
+		board.convertCoordinate("hallo");
+	}
+	
+	/**
+	 * Test-ID Board36-3
+	 */
+	@Test(expected = Exception.class)
+	public void convertCoordinatesTest6() {
+		Board board = new Board(boardWidth, true);
+		board.convertCoordinate("-23a");
+	}
+	
+	/**
+	 * Test-ID Board36-4
+	 */
+	@Test(expected = Exception.class)
+	public void convertCoordinatesTest7() {
+		Board board = new Board(boardWidth, true);
+		board.convertCoordinate("f-3");
+	}
 }

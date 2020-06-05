@@ -3,7 +3,7 @@ package dieBoese2;
 /**
  * 
  * @author Nasir Ahmad 
- * @version 0.2.2
+ * @version 0.2.3
  *
  */
 
@@ -22,23 +22,24 @@ public class Main {
 		
 		game.p1.makeMove(game.board);
 		game.board.printBoard();
-		game.p2.makeMove(board);
+		game.p2.makeMove(game.board);
 		game.board.printBoard();
 		
-		while(game.isRunning()) {
+		while(game.board.isRunning()) {
 			
 			game.p1.makeMove(game.board);
 			game.board.printBoard();
 			
-			if(game.isRunning()) {
+			if(game.board.isRunning()) {
 				game.p2.makeMove(game.board);
 				game.board.printBoard();
 			}
 			
 			System.out.println("Glückwunch "+game.board.whoWon+". Sie haben gewonnen!");
 			
-			Game game = new Game(); //Muss anders gelöst werden namens konflikt!
-			//game = new Game(); Alternative zur voherigen Zeile
+			//Game game = new Game(); //Muss anders gelöst werden namens konflikt!
+			
+			game = new Game(); //Alternative zur voherigen Zeile
 			
 			
 		}
