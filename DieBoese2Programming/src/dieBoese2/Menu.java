@@ -1,5 +1,7 @@
 package dieBoese2;
 
+import java.util.Scanner;
+
 //V.1.1.0
 //Author - Gabriel Kremensas
 public class Menu {
