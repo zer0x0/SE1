@@ -38,7 +38,7 @@ public class Main {
 			System.out.println("Glückwunch "+game.board.whoWon+". Sie haben gewonnen!");
 			
 			//Game game = new Game(); //Muss anders gelöst werden namens konflikt!
-			game = new Game(); Alternative zur voherigen Zeile
+			game = new Game(); //Alternative zur voherigen Zeile
 			
 			
 		}
