@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.1.5
+ * @version 0.2.0
  */
 public class Game {
 
@@ -26,10 +26,24 @@ public class Game {
 		p1 = new HumanPlayer('X');
 		p2 = new HumanPlayer('O');
 
+		//generate PvP or PvAI
+		//generatePlayers(menu.getPvPorPvAI());
+
+
 		/**
 		 * creates the Board with desired size
 		 */
 		board = new Board(menu.getBoardSize());
+	}
+
+	protected void generatePlayers(boolean getPvPorAI){
+
+		p1 = new HumanPlayer('X');
+
+		if(getPvPorAI)
+			p2 = new HumanPlayer('O');
+		else
+			p2 = new AI('O',menu.getDifficulty());
 	}
 
 	protected static String readInput() {
