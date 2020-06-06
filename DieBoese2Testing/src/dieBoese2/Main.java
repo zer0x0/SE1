@@ -1,9 +1,10 @@
+
 package dieBoese2;
 
 /**
  * 
  * @author Nasir Ahmad 
- * @version 0.2.3
+ * @version 0.3.2
  *
  */
 
@@ -20,10 +21,18 @@ public class Main {
 			game.p2.blockSpace(game.board);
 		}
 		
+		game.board.printBoard();
 		game.p1.makeMove(game.board);
 		game.board.printBoard();
 		game.p2.makeMove(game.board);
+		
+		game.board.blockBoard();
 		game.board.printBoard();
+		
+		game.p1.makeMove(game.board);
+		game.board.unblockBoard();
+		game.board.printBoard();
+		game.p2.makeMove(game.board);
 		
 		while(game.board.isRunning()) {
 			
@@ -35,10 +44,9 @@ public class Main {
 				game.board.printBoard();
 			}
 			
-			System.out.println("Glückwunch "+game.board.whoWon+". Sie haben gewonnen!");
+			System.out.println("Glueckwunsch "+game.board.whoWon()+". Sie haben gewonnen!");
 			
-			//Game game = new Game(); //Muss anders gelöst werden namens konflikt!
-			game = new Game(); //Alternative zur voherigen Zeile
+			game = new Game(); 
 			
 			
 		}
