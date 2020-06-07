@@ -3,10 +3,9 @@ package dieBoese2;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import org.junit.runners.Parameterized;
 import java.util.Arrays;
 
-class Boardtest2 {
+public class Boardtest2 {
 
 	final int BOARD_MAX_SIZE = 19;
 	final int BOARD_MIN_SIZE = 15;
@@ -18,13 +17,6 @@ class Boardtest2 {
 	String geschlagen = "\n" + "Es wurden Figuren geschlagen!" + "\n" + "\n"
 
 			+ "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" + "\n";
-
-	public Boardtest2(String coordinate, char symbol, String player1, String geschlagen) {
-		this.coordinate = coordinate;
-		this.symbol = symbol;
-		this.player1 = player1;
-		this.geschlagen = geschlagen;
-	}
 
 	private static char[][] makeHelpState(Board board) {
 
@@ -41,7 +33,7 @@ class Boardtest2 {
 		return helpstate;
 
 	}
- 
+
 	@Test
 	public void checkWin1() {
 		Board board = new Board(BOARD_MAX_SIZE);
