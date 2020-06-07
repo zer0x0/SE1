@@ -24,7 +24,7 @@ public class Game {
 
 
 		/**
-		 * creates the Board with desired size
+		 * creates the Board with desired sizes
 		 */
 		board = new Board(menu.getBoardSize());
 	}
