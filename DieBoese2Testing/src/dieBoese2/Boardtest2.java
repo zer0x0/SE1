@@ -41,12 +41,12 @@ class Boardtest2 {
 		return helpstate;
 
 	}
-
+ 
 	@Test
 	public void checkWin1() {
 		Board board = new Board(BOARD_MAX_SIZE);
-		board.isRunning = true;
-		assertTrue(board.checkWin(coordinate, symbol));
+		board.checkWin(coordinate, symbol);
+		assertFalse(board.isRunning());
 
 	}
 
