@@ -290,4 +290,133 @@ public class BoardTest {
 		Board board = new Board(BOARD_MIN_SIZE);
 		board.convertCoordinate("");
 	}
+
+	/**
+	 * Test-ID Board37
+	 */
+	@Test
+	public void blockBoardTest1() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			board.blockBoard();
+			board.printBoard();
+		}
+
+	}
+
+	/**
+	 * Test-ID Board38
+	 */
+	@Test
+	public void blockBoardTest2() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			char[][] helpstate = makeHelpState(board);
+			helpstate[2][6] = 'B';
+			helpstate[4][5] = 'B';
+			helpstate[8][14] = 'B';
+			helpstate[0][12] = 'B';
+			helpstate[13][4] = 'B';
+			helpstate[7][7] = 'B';
+			helpstate[3][4] = 'X';
+			helpstate[0][13] = 'O';
+			board.setBoardstate(helpstate);
+			board.blockBoard();
+			board.printBoard();
+		}
+	}
+
+	/**
+	 * Test-ID Board39
+	 */
+	@Test
+	public void blockBoardTest3() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			char[][] helpstate = makeHelpState(board);
+			helpstate[2][6] = 'B';
+			helpstate[4][5] = 'B';
+			helpstate[8][14] = 'B';
+			helpstate[0][12] = 'B';
+			helpstate[13][4] = 'B';
+			helpstate[7][7] = 'B';
+			helpstate[3][4] = 'X';
+			helpstate[0][13] = 'O';
+			board.setBoardstate(helpstate);
+			board.blockBoard();
+			board.blockBoard();
+			board.printBoard();
+		}
+	}
+
+	/**
+	 * Test-ID Board40
+	 */
+	@Test
+	public void unblockBoardTest1() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			board.blockBoard();
+			board.printBoard();
+			board.unblockBoard();
+			board.printBoard();
+		}
+	}
+
+	/**
+	 * Test-ID Board41
+	 */
+	@Test
+	public void unblockBoardTest2() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			char[][] helpstate = makeHelpState(board);
+			helpstate[2][6] = 'B';
+			helpstate[4][5] = 'B';
+			helpstate[8][14] = 'B';
+			helpstate[0][12] = 'B';
+			helpstate[13][4] = 'B';
+			helpstate[7][7] = 'B';
+			helpstate[3][4] = 'X';
+			helpstate[0][13] = 'O';
+			helpstate[0][0] = 'X';
+			helpstate[4][13] = 'O';
+			board.setBoardstate(helpstate);
+			board.blockBoard();
+			board.unblockBoard();
+			board.printBoard();
+		}
+	}
+
+	/**
+	 * Test-ID Board42
+	 */
+	@Test
+	public void unblockBoardTest3() {
+		Board board;
+		for (int i = BOARD_MIN_SIZE; i <= BOARD_MAX_SIZE; i++) {
+			board = new Board(i);
+			char[][] helpstate = makeHelpState(board);
+			helpstate[2][6] = 'B';
+			helpstate[4][5] = 'B';
+			helpstate[8][14] = 'B';
+			helpstate[0][12] = 'B';
+			helpstate[13][4] = 'B';
+			helpstate[7][7] = 'B';
+			helpstate[3][4] = 'X';
+			helpstate[0][13] = 'O';
+			helpstate[0][0] = 'X';
+			helpstate[4][13] = 'O';
+			helpstate[5][9] = 'X';
+			helpstate[6][14] = 'O';
+			board.setBoardstate(helpstate);
+			board.unblockBoard();
+			board.printBoard();
+		}
+	}
 }
