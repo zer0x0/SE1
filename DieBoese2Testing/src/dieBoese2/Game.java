@@ -1,13 +1,10 @@
 package dieBoese2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
  * @author Thanh Tran 1921390
- * @version 0.2.0
+ * @version 0.2.1
  */
 public class Game {
 
@@ -21,12 +18,8 @@ public class Game {
 		menu.menuLoop();
 
 		/**
-		 * generates the Players (first PvP)
+		 * generates the Players (PvP or PvAI)
 		 */
-		p1 = new HumanPlayer('X');
-		p2 = new HumanPlayer('O');
-
-		//generate PvP or PvAI
 		generatePlayers(menu.getPvPorPvAI());
 
 
