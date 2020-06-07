@@ -1,14 +1,10 @@
 package dieBoese2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import org.junit.runners.Parameterized;
 import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
 
 class Boardtest2 {
 
@@ -18,11 +14,11 @@ class Boardtest2 {
 	String coordinate = "16a";
 	char symbol = 'X';
 	String player1 = "Spieler 1 hat gewonnen!";
-	
+
 	String geschlagen = "\n" + "Es wurden Figuren geschlagen!" + "\n" + "\n"
 
-				+ "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" + "\n";
-	
+			+ "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" + "\n";
+
 	public Boardtest2(String coordinate, char symbol, String player1, String geschlagen) {
 		this.coordinate = coordinate;
 		this.symbol = symbol;
@@ -83,7 +79,7 @@ class Boardtest2 {
 	}
 
 	@Test
-	
+
 	public void checkWin4() {
 		Board board;
 
@@ -99,14 +95,14 @@ class Boardtest2 {
 			helpstate[0][3] = 'O';
 
 			board.setBoardstate(helpstate);
-			
-			assertEquals(player1,board.checkWin(coordinate, symbol));
-			
+
+			assertEquals(player1, board.checkWin(coordinate, symbol));
+
 		}
 	}
 
 	@Test
-	
+
 	public void checkDeleted1() {
 		Board board;
 
@@ -120,8 +116,8 @@ class Boardtest2 {
 			helpstate[8][2] = 'X';
 			helpstate[8][1] = 'O';
 			board.setBoardstate(helpstate);
-		
-			assertEquals(geschlagen,board.checkDeleted("9e", 'O'));
+
+			assertEquals(geschlagen, board.checkDeleted("9e", 'O'));
 		}
 	}
 
@@ -139,7 +135,7 @@ class Boardtest2 {
 			helpstate[8][2] = 'X';
 			helpstate[8][1] = 'X';
 			board.setBoardstate(helpstate);
-			assertEquals(geschlagen,board.checkDeleted("9e", 'O'));
+			assertEquals(geschlagen, board.checkDeleted("9e", 'O'));
 		}
 	}
 
@@ -157,7 +153,7 @@ class Boardtest2 {
 			helpstate[8][2] = 'X';
 			helpstate[8][1] = 'O';
 			board.setBoardstate(helpstate);
-			assertEquals(geschlagen,board.checkDeleted("e9", 'O'));
+			assertEquals(geschlagen, board.checkDeleted("e9", 'O'));
 
 		}
 	}
@@ -177,7 +173,7 @@ class Boardtest2 {
 			helpstate[0][1] = 'X';
 			board.setBoardstate(helpstate);
 			assertTrue(board.checkDeleted(coordinate, symbol));
-			
+
 		}
 	}
 
@@ -187,9 +183,9 @@ class Boardtest2 {
 	}
 
 	/**
-
+	 * 
 	 * Test-ID Board1
-
+	 * 
 	 */
 
 	@Test
@@ -206,16 +202,12 @@ class Boardtest2 {
 
 		}
 
-
-
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board2
-
+	 * 
 	 */
 
 	@Test
@@ -250,12 +242,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board3
-
+	 * 
 	 */
 
 	@Test
@@ -288,12 +278,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board7
-
+	 * 
 	 */
 
 	@Test
@@ -312,12 +300,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board8
-
+	 * 
 	 */
 
 	@Test
@@ -352,12 +338,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board9
-
+	 * 
 	 */
 
 	@Test
@@ -384,12 +368,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board9-1
-
+	 * 
 	 */
 
 	@Test
@@ -405,8 +387,6 @@ class Boardtest2 {
 		assertTrue(board.isValidMove("a16"));
 
 	}
-
-
 
 //	/**
 
@@ -426,8 +406,6 @@ class Boardtest2 {
 
 //	}
 
-
-
 //	/**
 
 //	 * Test-ID Board16
@@ -445,8 +423,6 @@ class Boardtest2 {
 //		assertFalse(board.isRunning());
 
 //	}
-
-
 
 //	/**
 
@@ -466,8 +442,6 @@ class Boardtest2 {
 
 //	}
 
-
-
 //	/**
 
 //	 * Test-ID Board18
@@ -486,12 +460,10 @@ class Boardtest2 {
 
 //	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board33
-
+	 * 
 	 */
 
 	@Test
@@ -548,12 +520,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board34
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -566,12 +536,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board35
-
+	 * 
 	 */
 
 	@Test
@@ -604,12 +572,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-1
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -622,12 +588,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-2
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -640,12 +604,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-3
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -658,12 +620,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-4
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -676,12 +636,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-5
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -694,12 +652,10 @@ class Boardtest2 {
 
 	}
 
-
-
 	/**
-
+	 * 
 	 * Test-ID Board36-6
-
+	 * 
 	 */
 
 	@Test(expected = Exception.class)
@@ -711,5 +667,5 @@ class Boardtest2 {
 		board.convertCoordinate("");
 
 	}
-	
+
 }
