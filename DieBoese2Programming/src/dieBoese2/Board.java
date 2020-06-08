@@ -11,11 +11,9 @@ import java.util.Scanner;
  */
 public class Board {
 
-	int zugcounter = 1;
-	boolean currentPlayer = true;
-
+	private int zugcounter = 1;
+	private boolean currentPlayer = true;
 	private char boardstate[][];
-//    private boolean whoWon; // evtl = currentPlayer ?? - standardmäßig auf true, muss also nicht mehr im Konstruktor übergeben werden. whoWon wird aufgerufen nachdem der winning move gespielt wird!
 	private boolean isRunning = true;
 
 	// getBoardstate, setBoardstate für Testing
@@ -26,7 +24,7 @@ public class Board {
 	public void setBoardstate(char boardstate[][]) {
 		this.boardstate = boardstate;
 	}
-	
+
 	Board(int size) {
 		boardstate = new char[size][size];
 		for (int i = 0; i < boardstate.length; i++) {
@@ -35,6 +33,7 @@ public class Board {
 			}
 		}
 	}
+
 	/**
 	 * 
 	 * 
@@ -67,6 +66,7 @@ public class Board {
 		for (int i = 65; i < 65 + boardstate.length; i++) {
 			System.out.print((char) i + "  ");
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
@@ -96,7 +96,13 @@ public class Board {
 
 		// besetzt
 
-		int[] coords = convertCoordinate(coordinate);
+		int[] coords = null;
+		try {
+			coords = convertCoordinate(coordinate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int x = coords[0];
 		int y = coords[1];
 
@@ -124,13 +130,18 @@ public class Board {
 	 * 
 	 * @param coordinate
 	 * @return int[]
+	 * @throws Exception 
 	 * 
 	 */
-	protected int[] convertCoordinate(String coordinate) {
+	protected int[] convertCoordinate(String coordinate) throws Exception {
 
 		coordinate = coordinate.toLowerCase();
 		int[] coords = new int[2];
 		int firstChar, secondChar, thirdChar;
+		
+		if(coordinate.length() == 0 || coordinate.length() >= 4) {
+			throw new Exception("Keine gültige Koordinate");
+		}
 
 		if ((int) coordinate.charAt(0) < 96) {
 			// der erste char ist eine Zahl!
@@ -149,7 +160,7 @@ public class Board {
 				coords[1] = firstChar;
 			}
 
-		} else {
+		} else if ((int) coordinate.charAt(0) > 96) {
 			// Der erste char ist ein Buchstabe!
 			if (coordinate.length() == 3) { // Bsp a12
 				firstChar = (int) coordinate.charAt(0) - 96;
@@ -165,10 +176,13 @@ public class Board {
 				coords[0] = firstChar;
 				coords[1] = secondChar;
 			}
+		} else {
+			throw new Exception("Keine gültige Koordinate");
 		}
 
 		return coords;
 	}
+
 	/**
 	 * 
 	 * 
@@ -179,15 +193,21 @@ public class Board {
 	boolean whoWon() {
 		return currentPlayer;
 	}
+
 	/**
 	 * 
-	 * @param coordinate, symbol
-	 * Checks if there are 5 same symbols in a row
+	 * @param coordinate, symbol Checks if there are 5 same symbols in a row
 	 * 
 	 */
 	protected void checkWin(String coordinate, char symbol) {
 
-		int[] coords = convertCoordinate(coordinate);
+		int[] coords = null;
+		try {
+			coords = convertCoordinate(coordinate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int y = coords[0] - 1;
 		int x = coords[1] - 1;
 
@@ -282,10 +302,11 @@ public class Board {
 			}
 		}
 	}
+
 	/**
 	 * 
-	 * @param coordinate, symbol
-	 * checks, if units should be deleted with the last move
+	 * @param coordinate, symbol checks, if units should be deleted with the last
+	 *                    move
 	 * 
 	 */
 
@@ -294,7 +315,13 @@ public class Board {
 		String geschlagen = "\n" + "Es wurden Figuren geschlagen!" + "\n" + "\n"
 				+ "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" + "\n";
 
-		int[] coords = convertCoordinate(coordinate);
+		int[] coords = null;
+		try {
+			coords = convertCoordinate(coordinate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int x = coords[0] - 1;
 		int y = coords[1] - 1;
 
@@ -376,16 +403,23 @@ public class Board {
 		}
 
 	}
+
 	/**
 	 * 
-	 * @param coordinate, symbol
-	 * places the symbol into the array and gives the parameters to both of the "check"-Methods
+	 * @param coordinate, symbol places the symbol into the array and gives the
+	 *                    parameters to both of the "check"-Methods
 	 * 
 	 */
 
 	void placeFigure(String coordinate, char symbol) {
 
-		int[] coords = convertCoordinate(coordinate);
+		int[] coords = null;
+		try {
+			coords = convertCoordinate(coordinate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (isValidMove(coordinate)) {
 			boardstate[coords[0] - 1][coords[1] - 1] = symbol;
@@ -403,6 +437,7 @@ public class Board {
 			unblockBoard();
 		}
 	}
+
 	/**
 	 * 
 	 * 
@@ -464,8 +499,8 @@ public class Board {
 			}
 
 		}
-		this.printBoard();
 	}
+
 	/**
 	 * 
 	 * 
@@ -481,8 +516,6 @@ public class Board {
 				}
 			}
 		}
-
-		this.printBoard();
 	}
 
 	char getSymbol() {
