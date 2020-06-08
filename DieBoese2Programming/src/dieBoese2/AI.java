@@ -30,8 +30,8 @@ int difficulty;
 	
 	protected int[] generateBlockMove(Board board) {
 		int blockedField[] = new int[2];
-		int x = board.boardstate.length/2;
-		int y = board.boardstate.length/2;
+		int x = board.getBoardstate().length/2;
+		int y = board.getBoardstate().length/2;
 		while(!board.isValidMove(convertCoordinate(x, y))) {
 			
 		}
