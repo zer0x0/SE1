@@ -3,12 +3,12 @@ package dieBoese2;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-/*
- * 
- * @author Sarah
- * @date 07.06.20
- * 
- */
+
+ /*
+  *  @author Sarah
+  *  @date 07.06.20
+  */
+ 
  
 public class BoardTest2 {
 
@@ -99,7 +99,7 @@ public class BoardTest2 {
 	@Test
 	public void checkDeleted2() {
 		Board board = new Board(BOARD_MAX_SIZE);
-		board.checkWin(coordinate, symbol);
+		board.checkDeleted(coordinate, symbol);
 		assertFalse(!board.isRunning());
 	}
 
@@ -109,7 +109,7 @@ public class BoardTest2 {
 	@Test
 	public void checkDeleted3() {
 		Board board = new Board(BOARD_MIN_SIZE);
-		board.checkWin(coordinate, symbol);
+		board.checkDeleted(coordinate, symbol);
 		assertTrue(board.isRunning());
 	}
 
@@ -119,7 +119,7 @@ public class BoardTest2 {
 	@Test
 	public void checkDeleted4() {
 		Board board = new Board(BOARD_MIN_SIZE);
-		board.checkWin(coordinate, symbol);
+		board.checkDeleted(coordinate, symbol);
 		assertFalse(!board.isRunning());
 	} 
 	
@@ -130,7 +130,7 @@ public class BoardTest2 {
 	public void checkDeleted5() {
 		coordinate = "20a";
 		Board board = new Board(BOARD_MAX_SIZE);
-		board.checkWin(coordinate, symbol);
+		board.checkDeleted(coordinate, symbol);
 		assertTrue(board.isRunning());
 	}
 
@@ -141,7 +141,7 @@ public class BoardTest2 {
 	public void checkDeleted6() {
 		coordinate = "16a";
 		Board board = new Board(BOARD_MIN_SIZE);
-		board.checkWin(coordinate, symbol);
+		board.checkDeleted(coordinate, symbol);
 		assertTrue(board.isRunning());
 	}
 
@@ -150,7 +150,19 @@ public class BoardTest2 {
 	 */
 	@Test
 	public void placeFigure1() {
-
+		Board board = new Board(BOARD_MAX_SIZE);
+		board.placeFigure(coordinate, symbol);
+		assertFalse(!board.isRunning());
+	}
+	
+	/*
+	 * Test-ID p2
+	 */
+	@Test
+	public void placeFigure2() {
+		Board board = new Board(BOARD_MAX_SIZE);
+		board.placeFigure(coordinate, symbol);
+		assertTrue(board.isRunning());
 	}
  
 }
